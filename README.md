@@ -17,3 +17,6 @@
 3. Получить векторную базу данных
 4. Реализовать класс YaGPT (для запросов)
 5. Молиться что все заработает
+
+# Доп. ссылки:
+- https://soshnikov.com/ai/creating-problem-domain-specific-chat-assistant-with-yandex-gpt-and-langchain-ru/
