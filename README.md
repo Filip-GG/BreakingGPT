@@ -7,6 +7,7 @@
 Папки:
 - dataset_input -- входной набор данных для дообучения модели
 - dataset -- обработанный наброр данных
+- vectorstores -- папка сохранений для embeddins
 
 # Описание исполняемых файлов
 - pdf_convector -- набор функций конвертации файлов в pdf для дльнейшей работы
@@ -23,6 +24,8 @@
 3. В файле конфигурации:
     - base_url_* -- это ip полученные в ходе запуска локального сервера
     - model_* -- это название моделей
+4. Переместите файлы для дообучеия в dataset_input
+5. Запустите блокнот main.ipymb
 
 # Доп. ссылки:
 - https://soshnikov.com/ai/creating-problem-domain-specific-chat-assistant-with-yandex-gpt-and-langchain-ru/
