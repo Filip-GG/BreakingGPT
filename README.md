@@ -13,6 +13,7 @@
 - pdf_convector -- набор функций конвертации файлов в pdf для дльнейшей работы
 - localEmbeddings -- класс emebeddings для работы с lm studio
 - file_message -- набор функций для работы с патками
+- vectorstores -- набор функций для работы с векторным хранилищем
 
 # Инструкция для запуска
 1. Установите Lm Studio (https://lmstudio.ai/) 
