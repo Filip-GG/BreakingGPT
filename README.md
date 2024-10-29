@@ -14,6 +14,8 @@
 - localEmbeddings -- класс emebeddings для работы с lm studio
 - file_message -- набор функций для работы с патками
 - vectorstores -- набор функций для работы с векторным хранилищем
+- api -- запуск api для работы в других приложениях
+- model -- работа с моделями
 
 # Инструкция для запуска
 1. Установите Lm Studio (https://lmstudio.ai/) 
@@ -27,6 +29,8 @@
     - model_* -- это название моделей
 4. Переместите файлы для дообучеия в dataset_input
 5. Запустите блокнот main.ipymb
+
+Если желаете работать с api то после пункта 4, откройте командную строку перейдите в директорию проекта и выполните команду python -m uvicorn API:app --reload
 
 # Доп. ссылки:
 - https://soshnikov.com/ai/creating-problem-domain-specific-chat-assistant-with-yandex-gpt-and-langchain-ru/

@@ -3,7 +3,7 @@ from langchain.document_loaders import DirectoryLoader, PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter, Language
 
 # Создание vectorstores и сохранение его
-def create_vectorstores(path, models , data : list, saves = True):
+def create_vectorstores(path, models , data : list, saves = True) -> FAISS:
     try:
         vectorstore = FAISS.from_texts(
         [
@@ -19,7 +19,7 @@ def create_vectorstores(path, models , data : list, saves = True):
         return "Error create vectorstores"
     
 # Загрузка vectorstores из папки сохранения
-def load_vectorstores(patch, model):
+def load_vectorstores(patch, model) -> FAISS:
     try:
         vectorstore = FAISS.load_local(
         patch, 
