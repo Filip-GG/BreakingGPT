@@ -32,4 +32,16 @@ async def query(data: Query):
 async def admin_qery(data: Query):
     if data.type == query_type[0]:
         return query(data)
-    
+    if data.type == query_type[2]:
+        from vectorstores import create_vectorstores, load_folder
+        from model import connect_embeddings_model
+        from file_message import to_all_pdf
+        try:
+            ambedding_model = connect_embeddings_model(config)
+            to_all_pdf('dataset_input','./dataset/')
+            data = load_folder('./dataset/')
+
+            create_vectorstores(ambedding_model, data)
+            return 'Обучние прошло успешно'
+        except: 
+            return 'Ошибка обучени на rog'
