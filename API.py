@@ -19,8 +19,13 @@ class Query(BaseModel):
 
 query_type = ["query", "restart", "start_rog", "load_file", "delete_file"]
 
-# Запрос
-@app.post('/')
+
+@app.post('uploloadfile')
+async def filemenegger():
+    pass
+
+# Запрос пользывателя
+@app.post('/user')
 async def query(data: Query):
     if data.type == query_type[0]:
         from model import query
@@ -28,14 +33,18 @@ async def query(data: Query):
         return out
     return "У вас не достаточно прав для использывавания."
 
+# Запрос администратора
 @app.post('/admin')
 async def admin_qery(data: Query):
     if data.type == query_type[0]:
         return query(data)
+    
+    # переобучение системы
     if data.type == query_type[2]:
         from vectorstores import create_vectorstores, load_folder
         from model import connect_embeddings_model
         from file_message import to_all_pdf
+
         try:
             ambedding_model = connect_embeddings_model(config)
             to_all_pdf('dataset_input','./dataset/')
@@ -45,3 +54,4 @@ async def admin_qery(data: Query):
             return 'Обучние прошло успешно'
         except: 
             return 'Ошибка обучени на rog'
+        
