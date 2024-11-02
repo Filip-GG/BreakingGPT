@@ -10,6 +10,7 @@ def connect_embeddings_model(config) -> LocalEmbeddings:
         with open(config, 'r') as config_file: 
             config = json.load(config_file)
     except:
+        print('Error open config')
         return 'Error open config'
     try: 
         model_embeddings = LocalEmbeddings(
@@ -18,6 +19,7 @@ def connect_embeddings_model(config) -> LocalEmbeddings:
         )
         return model_embeddings
     except:
+        print('Error connect embeddings model')
         return 'Error connect embeddings model'
     
 # Функция подключения к модели
@@ -26,6 +28,7 @@ def connect_model(config) -> OpenAI:
         with open(config, 'r') as config_file: 
             config = json.load(config_file)
     except:
+        print('Error open config')
         return 'Error open config'
     try:
         model = OpenAI(
@@ -35,6 +38,7 @@ def connect_model(config) -> OpenAI:
         )
         return model
     except:
+        print('Error connect model')
         return 'Error connect model'
 
 # Ответ на запрос
@@ -48,7 +52,7 @@ def query(text, config):
 
     vect = retriever.invoke(text)
     temple = ChatPromptTemplate([
-        ("system", 'Дай краткий ответ на вопрос. Зная следующую информацию: {vect}'),
+        ("system", 'Дай ответ в 3-7 предложений на вопрос. Зная следующую информацию: {vect}'),
         ("user", '{text}')
     ])
     out = model.invoke(

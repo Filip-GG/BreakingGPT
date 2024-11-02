@@ -2,6 +2,15 @@ import os
 import shutil
 import pdf_convector
 
+# Удаление файла
+def delete_file(patch):
+    try:
+        os.remove(patch)
+        return True
+    except:
+        print('Error delete')
+        return False
+
 # Получение списка директорий
 def dataset_listdir(patch):
     return os.listdir(patch)
@@ -40,6 +49,7 @@ def copy(path, out_path):
         shutil.copy(path, out_path)
         return True
     except:
+        print('Error: copy file')
         return 'Error: copy file'
 
 # Переводить все в pdf
@@ -58,6 +68,9 @@ def to_all_pdf(path, out_path):
                 )
             )
             )))
+        data_list = dataset_listdir(path)
+        #Удаление ненужных файлов
         return True
     except:
+        print('Error: all to pdf')
         return 'Error: all to pdf'    

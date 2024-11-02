@@ -9,18 +9,32 @@ class Query(BaseModel):
     query : str
     """
     type - переменная типа запроссв{
-        query - запрос в llm
-        restart - рестарт системы
+        query - запрос в llm (в query запрос)
+        restart - рестарт системы 
         start_rog - запуск rog обуения
+        folder_list - список файлов для обучения
         load_file - загрузка файла
-        delete_file - удаление файла
+        delete_file - удаление файла (в query название файла)
         }
     """
 
-query_type = ["query", "restart", "start_rog", "load_file", "delete_file"]
+query_type = ["query", "restart", "start_rog", "folder_list", "load_file", "delete_file"]
 
+@app.post('/folder_list')
+async def folder_list(data: Query):
+    if data.type == query_type[3]:
+        from file_message import dataset_listdir
+        return dataset_listdir('dataset')
+    return 'Ошибка запросса'
 
-@app.post('uploloadfile')
+@app.post('/del_file')
+async def del_file(data: Query):
+    if data.type == query_type[5]:
+        from file_message import delete_file
+        return delete_file('./dataset/'+data.query)
+    return 'Ошибка запросса'
+
+@app.post('/uploloadfile')
 async def filemenegger():
     pass
 
