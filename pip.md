@@ -1,0 +1,12 @@
+pip install fastapi
+pip install uvicorn
+pip install langchain
+pip install langchain-core
+pip install langchain-community
+pip install langchain-experimental
+pip install langgraph
+pip install langchain-openai
+pip install requests
+pip install pydantic
+pip install docx2pdf
+pip install doc2docx
