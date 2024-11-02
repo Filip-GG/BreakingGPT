@@ -19,8 +19,10 @@
 
 # Инструкция для запуска
 1. Установите Lm Studio (https://lmstudio.ai/) 
-    - Скачайте модель для Embeddings: nomic-embed-text-v1.5-GGUF/nomic-embed-text-v1.5.f32.gguf
+    - Скачайте модель для Embeddings: Выберите 'Searchall' и найдите nomic-embed-text-v1.5-GGUF/nomic-embed-text-v1.5.f32.gguf
+    ![Модель для Embeddings](img/image1.png)
     - Скачайте модель для Обработки текста: Hermes-3-Llama-3.1-8B-GGUF/Hermes-3-Llama-3.1-8B.Q4_K_M.gguf
+    ![Модель для Обработки текста](img/image2.png)
     - PS: модель для обработки можно использывать ЛЮБУЮ, НО придеться преерписывать выод в model.py 
     для Embeddings не получиться, так как надо будет преписывать класс в LocalEmbeddings.py
     - Запустрите локальный ссервер и подключите скаченные модели
@@ -29,6 +31,8 @@
 3. В файле конфигурации:
     - base_url_* -- это ip полученные в ходе запуска локального сервера
     - model_* -- это название моделей
+    PS: IP будет выглядить примерно так
+    ![Пример ip](img/ip.png)
 4. Переместите файлы для дообучеия в dataset_input
 - Для консоьного запуска
 5. Запустите блокнот main.ipymb
