@@ -69,7 +69,7 @@ async def admin_qery(data: Query):
 
         try:
             ambedding_model = connect_embeddings_model(config)
-            to_all_pdf('dataset_input','./dataset/')
+            #to_all_pdf('dataset_input','./dataset/')
             data = load_folder('./dataset/')
             create_vectorstores(ambedding_model, data)
             return 'Обучние прошло успешно'
