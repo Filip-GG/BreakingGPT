@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, File, UploadFile
 from pydantic import BaseModel
 
 app = FastAPI()
@@ -20,6 +20,7 @@ class Query(BaseModel):
 
 query_type = ["query", "restart", "start_rog", "folder_list", "load_file", "delete_file"]
 
+# Получение списка файлов для обучения
 @app.post('/folder_list')
 async def folder_list(data: Query):
     if data.type == query_type[3]:
@@ -27,6 +28,7 @@ async def folder_list(data: Query):
         return dataset_listdir('dataset')
     return 'Ошибка запросса'
 
+# Удаление файла
 @app.post('/del_file')
 async def del_file(data: Query):
     if data.type == query_type[5]:
@@ -34,9 +36,15 @@ async def del_file(data: Query):
         return delete_file('./dataset/'+data.query)
     return 'Ошибка запросса'
 
+# Загрузка файла
 @app.post('/uploloadfile')
-async def filemenegger():
-    pass
+def upload_file(uploaded_file: UploadFile = File(...)):
+    file_location = f"dataset_input/{uploaded_file.filename}"
+    with open(file_location, "wb+") as file_object:
+        file_object.write(uploaded_file.file.read())
+    from file_message import to_all_pdf
+    to_all_pdf('dataset_input','./dataset/')
+    return f"Файл сохранен '{file_location}'"
 
 # Запрос пользывателя
 @app.post('/user')
@@ -63,7 +71,6 @@ async def admin_qery(data: Query):
             ambedding_model = connect_embeddings_model(config)
             to_all_pdf('dataset_input','./dataset/')
             data = load_folder('./dataset/')
-
             create_vectorstores(ambedding_model, data)
             return 'Обучние прошло успешно'
         except: 

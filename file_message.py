@@ -69,7 +69,8 @@ def to_all_pdf(path, out_path):
             )
             )))
         data_list = dataset_listdir(path)
-        #Удаление ненужных файлов
+        for link in data_list:
+            delete_file(path+'/'+link)
         return True
     except:
         print('Error: all to pdf')
