@@ -10,6 +10,7 @@ def connect_embeddings_model(config) -> LocalEmbeddings:
         with open(config, 'r') as config_file: 
             config = json.load(config_file)
     except:
+        print('Error open config')
         return 'Error open config'
     try: 
         model_embeddings = LocalEmbeddings(
@@ -18,6 +19,7 @@ def connect_embeddings_model(config) -> LocalEmbeddings:
         )
         return model_embeddings
     except:
+        print('Error connect embeddings model')
         return 'Error connect embeddings model'
     
 # Функция подключения к модели
@@ -26,6 +28,7 @@ def connect_model(config) -> OpenAI:
         with open(config, 'r') as config_file: 
             config = json.load(config_file)
     except:
+        print('Error open config')
         return 'Error open config'
     try:
         model = OpenAI(
@@ -35,6 +38,7 @@ def connect_model(config) -> OpenAI:
         )
         return model
     except:
+        print('Error connect model')
         return 'Error connect model'
 
 # Ответ на запрос
@@ -47,14 +51,23 @@ def query(text, config):
     retriever = vectorstore.as_retriever()
 
     vect = retriever.invoke(text)
+
+    print(vect)
+
+    data = [item.page_content for item in vect]
+
+    from vectorstores import load_data_dict
+    all_data = load_data_dict()
+    list_file = list(map(lambda item: all_data[item], data))
+
     temple = ChatPromptTemplate([
-        ("system", 'Дай краткий ответ на вопрос. Зная следующую информацию: {vect}'),
+        ("system", 'Дай ответ в 3-7 предложений на вопрос. Зная следующую информацию: {data}'),
         ("user", '{text}')
     ])
     out = model.invoke(
         temple.invoke({
-            'vect':vect,
+            'data':data,
             'text':text
         })
     )
-    return out
+    return out.split('<|end_of_text|>')[0]+'Даеные полученны из:\n'+'\n'.join(list_file)
