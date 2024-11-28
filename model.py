@@ -70,4 +70,4 @@ def query(text, config):
             'text':text
         })
     )
-    return out.split('<|end_of_text|>')[0]+'Даеные полученны из:\n'+'\n'.join(list_file)
+    return out+'Даеные полученны из:\n'+'\n'.join(list_file)

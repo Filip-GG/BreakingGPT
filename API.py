@@ -71,7 +71,9 @@ async def admin_qery(data: Query):
             ambedding_model = connect_embeddings_model(config)
             #to_all_pdf('dataset_input','./dataset/')
             data = load_folder('./dataset/')
-            create_vectorstores(ambedding_model, data)
+            if create_vectorstores(ambedding_model, data) == "Error create vectorstores":
+                print('Ошибка обучени на rog')
+                return 'Ошибка обучени на rog'
             return 'Обучние прошло успешно'
         except: 
             return 'Ошибка обучени на rog'
