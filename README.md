@@ -54,3 +54,4 @@ python -m uvicorn API:app --reload
 
 # Доп. ссылки:
 - https://soshnikov.com/ai/creating-problem-domain-specific-chat-assistant-with-yandex-gpt-and-langchain-ru/
+- 
